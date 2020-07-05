@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  airflow:
+    image: puckel/docker-airflow
+    links:
+      - postgres
+    ports:
+      - 8080:8080
+
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
+
+  # pgweb:
+  #   image: donnex/pgweb
+  #   links:
+  #     - postgres
+  #   ports:
+  #     - 8080:8080
+
+  # dataiku:
+  #   image: dataiku/dss
+  #   container_name: hh_dataiku
+  #   links:
+  #     - postgres
+  #   ports:
+  #     - "10000:10000"
+  #   volumes:
+  #      - ./dss:/home/dataiku/dss
